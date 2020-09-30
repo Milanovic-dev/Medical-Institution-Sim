@@ -113,8 +113,8 @@ class BloodCholesterolTest extends BloodSupstanceTest {
 
 class Logger {
     static log(action){
-        const date = new Date()
-        console.log(`[${date.toString()}]:  ${action}`);''
+        const date = new Date();
+        console.log(`[${date.toString()}]:  ${action}`);
     }
 }
 
