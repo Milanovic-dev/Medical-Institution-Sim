@@ -1,8 +1,16 @@
-class Doctor {
-    constructor(firstName, lastName, specialization) {
+
+class Person {
+    constructor(firstName, lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+}
+
+class Doctor extends Person {
+    constructor(firstName, lastName, specialization) {
+        super(firstName, lastName);
         this.specialization = specialization;
+        Logger.log(`Created doctor ${firstName}`);
     }
 
     appoint(appointment, patient) {
@@ -15,18 +23,19 @@ class Doctor {
     }
 }
 
-class Patient {
+class Patient extends Person {
     constructor(firstName, lastName, JMBG, mrNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        super(firstName, lastName);
         this.JMBG = JMBG;
         this.mrNumber = mrNumber;
         this.doctor = null;
         this.appointemnts = [];
+        Logger.log(`Created patient ${firstName}`);
     }
 
     setDoctor(doctor) {
         this.doctor = doctor;
+        Logger.log(`Patient ${this.firstName} choose doctor ${this.doctor.firstName}`)
     }
 
     async finishAppointment() {
@@ -37,7 +46,7 @@ class Patient {
 
         const appointment = this.appointemnts.shift();
         const finished = await appointment.evaluate();
-
+        Logger.log(`Patient ${this.firstName} finished an appointment!`);
         return finished;
     }
 }
@@ -99,6 +108,13 @@ class BloodSugarTest extends BloodSupstanceTest {
 class BloodCholesterolTest extends BloodSupstanceTest {
     constructor() {
         super();
+    }
+}
+
+class Logger {
+    static log(action){
+        const date = new Date()
+        console.log(`[${date.toString()}]:  ${action}`);''
     }
 }
 
