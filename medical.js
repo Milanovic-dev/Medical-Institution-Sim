@@ -30,6 +30,11 @@ class Patient {
     }
 
     async finishAppointment() {
+        if(this.appointemnts.length == 0){
+            console.warn('No appointments to finish');
+            return;
+        }
+
         const appointment = this.appointemnts.shift();
         const finished = await appointment.evaluate();
 
@@ -107,7 +112,7 @@ const simulate = async () => {
     patient.setDoctor(doctor);
 
     console.log("Making appointments");
-    
+
     doctor.appoint(new BloodSugarTest(), patient);
     doctor.appoint(new BloodPressureTest(), patient);
 
